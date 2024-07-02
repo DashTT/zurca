@@ -139,7 +139,7 @@ def declaracion():
     grafo(8, {2: "Volver."}, "Dentro del ataud encuentras un papel con el código '103224'.")
     grafo(6, {2: "Volver.", 9: "Seguir."}, "Todo parece en orden.")
     grafo(10, {7: "Volver a intentarlo."}, "Te ahogaste intentándolo.") 
-    grafo(9, {11:"Ir al camino de Juno.", 12:"Ir al camino de Venus.", 13:"Ir al camino de Aurelio."}, "Te topas con varios caminos, cada uno tiene el nombre de una deidad diferente.")
+    grafo(9, {11:"Ir al camino de Juno.", 12:"Ir al camino de Venus.", 13:"Ir al camino de Aurelio.", 6: "Volver."}, "Te topas con varios caminos, cada uno tiene el nombre de una deidad diferente.")
     grafo(11, {14: "Pasar por el puente.", 15:"Bajar al acantilado.", 9:"Volver"}, "Te encuentras con un puente colgante sobre un acantilado, hay una cuerda para bajar al acantilado.")
     grafo(14, {11: "Volver a intentarlo."}, "El puente se rompió mientras pasabas. Buen intento.")
     grafo(15, {16:"Adentrarte en la cueva.", 17:"Mover algunas piedras para tratar de encontrar una salida."}, "Mientras bajabas hubo un derrumbe y ahora estás en una cueva sin salida.")
