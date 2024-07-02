@@ -95,8 +95,8 @@ def menuPrincipal():
         menuPrincipal()
     if decision == "3":
         grafosOrdenados = obtener_grafos_ordenados()
-        for grafo in grafosOrdenados:
-            print(f"{grafo.id}: {grafo.cabecera}")
+        for grafoLoc in grafosOrdenados:
+            print(f"{grafoLoc.id}: {grafoLoc.cabecera}")
         
         while True:
             volver = input("Volver al menú principal (y/n): ")
