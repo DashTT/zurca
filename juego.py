@@ -1,4 +1,6 @@
 import time
+import networkx as nx
+import matplotlib.pyplot as plt
 
 def leer_archivo(ruta_archivo):
     try:
@@ -103,7 +105,30 @@ def menuPrincipal():
             else:
                 print("Ingresa una opción correcta")
         menuPrincipal()
- 
+
+def graficar_grafos(guardar=False, nombre_archivo='grafos.png'):
+    G = nx.DiGraph()
+    grafos_ordenados = obtener_grafos_ordenados()
+
+    # Depuración: Imprimir los IDs y cabeceras de los grafos
+    print("Grafos ordenados:")
+    for grafo in grafos_ordenados:
+        print(f'ID: {grafo.id}, Cabecera: {grafo.cabecera}')
+        G.add_node(grafo.id, label=grafo.cabecera)
+        for conexion in grafo.conexiones:
+            if int(conexion) in grafo.grafos:
+                print(f'Añadiendo arista de {grafo.id} a {conexion}')
+                G.add_edge(grafo.id, int(conexion))
+
+    pos = nx.spring_layout(G, k=0.5, iterations=50)
+    labels = nx.get_node_attributes(G, 'label')
+    plt.figure(figsize=(50, 50))
+    nx.draw(G, pos, with_labels=True, labels={node: f"{node}\n{labels[node]}" for node in labels}, node_size=2000, node_color='lightblue', font_size=8, font_color='black', font_weight='bold', arrows=True)
+    plt.title("Grafos Unidos", size=30)
+    if guardar:
+        plt.savefig(nombre_archivo)
+    plt.show()
+
 def declaracion():
     grafo(1, {2:'Salir de la cabaña.', 3:'Esperar a hacerte viejo.', 4: 'Leer un poema que dejó tu padre.'}, "Estás en la cabaña de tu difunto padre.")
     grafo(2, {5: 'Aproximarte al ruido del río.', 6: "Ir al camino pedregoso."}, "Escuchas un río a lo lejos en una dirección y en otra dirección ves un camino pedregoso.")
@@ -146,7 +171,7 @@ if palabra == "condenada":
 else:
     grafo.grafos[28].impresion()
 """
-    grafo(26, {}, "Completa una frase", codigo26)
+    grafo(26, {21:"Ganaste", 28:"Perdiste"}, "Completa una frase", codigo26)
     grafo(28, {21:"Volver a intentarlo."}, "La maquina activo una trampa, la cuál termino inundando toda la habitación dejándote sin aire.")
 
     grafo(22, {15:"El camino de la izquierda.", 37:"El camino de la derecha.", 13:"Volver"}, "El sendero se divide dos. El camino izquierdo baja y el camino derecho sube.")
@@ -162,9 +187,16 @@ if numeros == 676624:
 else: 
     grafo.grafos[40].impresion()
     """
-    grafo(39, {}, "Ingresa los dos números más importantes", codigo39)
+    grafo(39, {40: "Perdiste", 41:"Ganaste"}, "Ingresa los dos números más importantes", codigo39)
     
     grafo(40, {1: "Volver a intentarlo... Auch"}, "La maquina ha explotado, ¿será que te falta algo?.")
     grafo(41, {1: "Volver a jugar"}, "El tesoro de tu padre es tuyo. GANASTE!!!")
+
+"""
+DESCOMENTAR PARA GRAFICAR.
+declaracion()
+graficar_grafos(True)
+"""
+
 menuPrincipal()
 
